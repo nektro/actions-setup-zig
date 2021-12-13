@@ -30002,6 +30002,10 @@ const archMap = {
     arm64: "aarch64",
 };
 
+/**
+ * @param {string} dir
+ * @param {Function<Error,string>} action
+ */
 function dive(dir, action) {
     if (typeof action !== "function")
         action = function (error, file) { };
@@ -30040,8 +30044,8 @@ async function run() {
 
     return Promise.resolve(zig_url)
         .then(x => cache.downloadTool(x))
-        .then(x => decompress(x, zig_folder, { plugins: is_windows ? [] : [decompressTarxz()] }))
-        .then(_ => cache.cacheDir(zig_folder, "zig", version))
+        .then(x => decompress(x, "zig", { plugins: is_windows ? [] : [decompressTarxz()] }))
+        .then(_ => cache.cacheDir(`zig/${zig_folder}`, "zig", `${version}-2`))
         .then(x => actions.addPath(x))
         .then(_ => {
             dive(".", (_, path) => console.log(path));

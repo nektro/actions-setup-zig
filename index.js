@@ -86,7 +86,7 @@ async function run() {
         .then(_ => cache.cacheDir(zig_folder, "zig", version))
         .then(x => actions.addPath(x))
         .then(_ => {
-            dive(".", (path) => console.log(path));
+            dive(".", (_, path) => console.log(path));
         })
         .catch(err => actions.error(err));
 }

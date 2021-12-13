@@ -27,7 +27,7 @@
   "dependencies": {
     "@actions/core": "^1.6.0",
     "@actions/tool-cache": "^1.7.1",
-    "@octokit/plugin-throttling": "^3.5.1",
+    "@octokit/plugin-throttling": "^3.5.2",
     "@octokit/rest": "^18.7.0",
     "decompress": "^4.2.1",
     "decompress-tarxz": "^3.0.0"

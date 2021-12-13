@@ -51,7 +51,8 @@ async function run() {
     const folder = master_build ? "builds" : `download/${version}`;
     const the_os = osMap[os.platform()];
     const the_arch = archMap[os.arch()];
-    const ext = the_os === "windows" ? "zip" : "tar.xz";
+    const is_windows = the_os === "windows";
+    const ext = is_windows ? "zip" : "tar.xz";
 
     const zig_folder = `zig-${the_os}-${the_arch}-${version}`;
     const zig_file = `${zig_folder}.${ext}`;
@@ -59,7 +60,7 @@ async function run() {
 
     return Promise.resolve(zig_url)
         .then(x => cache.downloadTool(x))
-        .then(x => decompress(x, zig_folder, { plugins: [decompressTarxz()] }))
+        .then(x => decompress(x, zig_folder, { plugins: is_windows ? [] : [decompressTarxz()] }))
         .then(_ => cache.cacheDir(zig_folder, "zig", version))
         .then(x => actions.addPath(x))
         .catch(err => actions.error(err));

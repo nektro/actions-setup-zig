@@ -7,7 +7,7 @@ const { Octokit } = require("@octokit/rest");
 const { throttling } = require("@octokit/plugin-throttling");
 
 const decompress = require("decompress");
-const decompressTarxz = require("decompress-tarxz");
+const decompressTarxz = require("@felipecrs/decompress-tarxz");
 
 const OctokitImpl = Octokit.plugin(throttling);
 

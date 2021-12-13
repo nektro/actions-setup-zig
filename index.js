@@ -60,7 +60,7 @@ async function run() {
     return Promise.resolve(zig_url)
         .then(x => cache.downloadTool(x))
         .then(_ => decompress(zig_file, zig_folder, { plugins: [decompressTarxz()] }))
-        .then(_ => cache.cacheDir(zig_folder))
+        .then(_ => cache.cacheDir(zig_folder, "zig", version))
         .then(_ => actions.addPath(zig_folder))
         .catch(err => actions.error(err));
 }

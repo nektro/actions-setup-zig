@@ -1,7 +1,7 @@
 {
-  "name": "javascript-action",
-  "version": "1.0.0",
-  "description": "JavaScript Action Template",
+  "name": "setup-zig",
+  "version": "0.1.0",
+  "description": "Use @ziglang in your Github Actions workflows",
   "main": "index.js",
   "scripts": {
     "lint": "eslint .",
@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/actions/javascript-action.git"
+    "url": "git+https://github.com/nektro/actions-setup-zig.git"
   },
   "keywords": [
     "GitHub",
@@ -21,15 +21,20 @@
   "author": "",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/actions/javascript-action/issues"
+    "url": "https://github.com/nektro/actions-setup-zig/issues"
   },
-  "homepage": "https://github.com/actions/javascript-action#readme",
+  "homepage": "https://github.com/nektro/actions-setup-zig#readme",
   "dependencies": {
-    "@actions/core": "^1.2.5"
+    "@actions/core": "^1.4.0",
+    "@actions/tool-cache": "^1.7.1",
+    "@octokit/plugin-throttling": "^3.5.1",
+    "@octokit/rest": "^18.7.0",
+    "decompress": "^4.2.1",
+    "decompress-tarxz": "^3.0.0"
   },
   "devDependencies": {
-    "@vercel/ncc": "^0.31.1",
-    "eslint": "^8.0.0",
-    "jest": "^27.2.5"
+    "@vercel/ncc": "^0.29.0",
+    "eslint": "^7.31.0",
+    "jest": "^27.0.6"
   }
 }

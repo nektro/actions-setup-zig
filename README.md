@@ -9,7 +9,7 @@ https://github.com/ziglang/zig
 ## Usage
 
 ```yaml
-- uses: nektro/actions-setup-zigmod@v1
+- uses: nektro/actions-setup-zig@v1
 
 - run: zig version
 

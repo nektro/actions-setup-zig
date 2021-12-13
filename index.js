@@ -1,4 +1,5 @@
 const os = require("os");
+const fs = require("fs");
 
 const actions = require("@actions/core");
 const cache = require("@actions/tool-cache")
@@ -43,6 +44,27 @@ const archMap = {
     arm64: "aarch64",
 };
 
+function dive(dir, action) {
+    if (typeof action !== "function")
+        action = function (error, file) { };
+
+    fs.readdir(dir, function (err, list) {
+        if (err) return action(err);
+
+        list.forEach(function (file) {
+            const path = dir + "/" + file;
+
+            fs.stat(path, function (err, stat) {
+                if (stat && stat.isDirectory())
+                    dive(path, action);
+                else
+                    action(null, path);
+            });
+        });
+    });
+};
+
+
 // most @actions toolkit packages have async methods
 async function run() {
     const latest_version = await octokit.repos.listReleases({ owner: "ziglang", repo: "zig" }).then(x => x.data[0].tag_name);
@@ -63,6 +85,9 @@ async function run() {
         .then(x => decompress(x, zig_folder, { plugins: is_windows ? [] : [decompressTarxz()] }))
         .then(_ => cache.cacheDir(zig_folder, "zig", version))
         .then(x => actions.addPath(x))
+        .then(_ => {
+            dive(".", (path) => console.log(path));
+        })
         .catch(err => actions.error(err));
 }
 
